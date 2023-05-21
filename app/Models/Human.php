@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Human extends Model
 {
     use HasFactory;
+
+    public function pets()
+    {
+        return $this->belongsToMany(Pet::class, 'humans_pets');
+    }
 }
