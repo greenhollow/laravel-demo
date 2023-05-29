@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 class Human extends Model
 {
     use HasFactory;
-    use HasUuids; // <-- by default, incremental and targets the `id` column
+    use HasUuids;
 
     /**
      * The model's default values for attributes.
@@ -18,8 +18,7 @@ class Human extends Model
      * @var array
      */
     protected $attributes = [
-        'name' => '', // <-- non-nullable hidden by factory
-        // 'uuid' => Uuid::uuid4(), <-- "Constant expression contains invalid operations"
+        'name' => '',
     ];
 
     public function pets()
@@ -38,10 +37,20 @@ class Human extends Model
     }
 
     /**
-     * Generate a new UUID for the model.
+     * Generate a new UUID for the model, overriding the default incremental
+     * UUID type.
      */
     public function newUniqueId(): string
     {
         return (string) Uuid::uuid4();
+    }
+
+    /**
+     * Get the route key for the model, overriding the default targeting of the
+     * id column.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
     }
 }
