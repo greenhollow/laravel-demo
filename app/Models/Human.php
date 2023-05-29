@@ -21,6 +21,24 @@ class Human extends Model
         'name' => '',
     ];
 
+    /**
+     * Specifies which attributes should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+    ];
+
+    /**
+     * Exclude attributes that should not be exposed.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'id',
+    ];
+
     public function pets()
     {
         return $this->belongsToMany(Pet::class, 'humans_pets');

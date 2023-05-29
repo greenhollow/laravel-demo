@@ -22,7 +22,9 @@ class UpdateHumanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            '*.op' => 'required|in:add,remove,replace,copy,move,test',
+            '*.path' => 'required|string',
+            '*.value' => 'required',
         ];
     }
 }

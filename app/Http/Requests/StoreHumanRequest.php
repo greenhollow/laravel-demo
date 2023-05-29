@@ -7,11 +7,18 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreHumanRequest extends FormRequest
 {
     /**
+     * Indicates if the validator should stop on the first rule failure.
+     *
+     * @var bool
+     */
+    protected $stopOnFirstFailure = true;
+
+    /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +29,13 @@ class StoreHumanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id' => 'prohibited',
+            'uuid' => 'prohibited',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+            ],
         ];
     }
 }
